@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import './Pokemon.css';
 
 function Pokemon() {
 
@@ -53,12 +54,13 @@ function Pokemon() {
         }, [num]);
 
     return (
-        <div>
-            <button onClick={generateNum}>Generate new pokemon</button>
-            <h1>{pokemon.name}</h1>
-            <p>{pokemon.type}</p>
-            <p>{pokemon.typeTwo}</p>
-            <img src={pokemon.image} alt='pokemonSprite'/>
+        <div className="Container">
+            <button className='button-54' onClick={generateNum}>Generate new pokemon</button>
+            <div className="pokeInfo">
+                <h1>{pokemon.name}</h1>
+                <img src={pokemon.image} alt='pokemonSprite'/>
+                <p>{pokemon.type} {pokemon.typeTwo}</p>
+            </div>
         </div>
     )
     
