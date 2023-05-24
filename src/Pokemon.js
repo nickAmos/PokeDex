@@ -4,6 +4,7 @@ function Pokemon(props) {
 
 
     return (
+        <>
         <div className="Container">
             <div className="pokeInfo">
                 <h1>{props.name}</h1>
@@ -11,6 +12,8 @@ function Pokemon(props) {
                 <p>{props.typeOne} {props.typeTwo}</p>
             </div>
         </div>
+       
+        </>
     )
     
 }
