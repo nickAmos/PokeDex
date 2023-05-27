@@ -2,9 +2,19 @@
 import './App.css';
 import Pokemon from './Pokemon';
 import { useEffect, useState } from "react";
+import Results from './Results';
 
 
-
+const counterAndMove = {
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  width: '100vw',
+  height: '30vh',
+  backgroundColor: 'rgb(54, 55, 68)',
+  color: 'white',
+  flexDirection: 'column'
+}
 
 
 function App() {
@@ -12,7 +22,8 @@ function App() {
   const [pokemonOne, setPokemonOne] = useState();
   const [pokemonTwo, setPokemonTwo] = useState();
   const [pokemonThree, setPokemonThree] = useState();
-  const [generation, setGeneration] = useState(0);
+  const [generation, setGeneration] = useState(false);
+  const [count, setCount] = useState(0);
 
 
   
@@ -163,18 +174,17 @@ function App() {
 
 
 
-if (!pokemonOne) {
+if (!generation) {
   
   return (
-    <>
-    <button className='button-54' onClick={generate}>Generate new pokemon</button>
-  <p>Before generorating Pokemon</p>
-  </>
+    <div className='Landing'>
+      <button className='button-landing' onClick={generate}>Start Game</button>
+    </div>
   )
 }
 
 
-if (pokemonOne && pokemonTwo && pokemonThree) {
+if (generation && pokemonOne) {
 
   let movesArray = [...pokemonOne.movepool, ...pokemonTwo.movepool, ...pokemonThree.movepool];
   let noDuplicateArray = [...new Set(movesArray)];
@@ -189,12 +199,16 @@ if (pokemonOne && pokemonTwo && pokemonThree) {
       <Pokemon className='Pokemon' name={pokemonOne.name} src={pokemonOne.image} typeOne={pokemonOne.type} typeTwo={pokemonOne.typeTwo} movepool={pokemonOne.movepool} choosenMove={choosenMove}  />   
       <Pokemon className='Pokemon' name={pokemonTwo.name} src={pokemonTwo.image} typeOne={pokemonTwo.type} typeTwo={pokemonTwo.typeTwo} movepool={pokemonTwo.movepool} choosenMove={choosenMove} /> 
       <Pokemon className='Pokemon' name={pokemonThree.name} src={pokemonThree.image} typeOne={pokemonThree.type} typeTwo={pokemonThree.typeTwo} movepool={pokemonThree.movepool} choosenMove={choosenMove} />
-      
-      
     </div>
-    <button className='button-54' onClick={generate}>Refresh</button>
-    <p>All moves found in these pokemon: </p> 
-    <p>chosen move: {choosenMove}</p>
+    <div className='App-Container'>
+      <Results poke='one' choosenMove={choosenMove} movepool={pokemonOne.movepool} setGeneration={setGeneration} setCount={setCount} count={count}/>
+      <Results poke='Two' choosenMove={choosenMove} movepool={pokemonTwo.movepool} setGeneration={setGeneration} setCount={setCount} count={count}/>
+      <Results poke='Three' choosenMove={choosenMove} movepool={pokemonThree.movepool} setGeneration={setGeneration} setCount={setCount} count={count} />
+    </div>
+    <div style={counterAndMove}>
+      <h2>{choosenMove}</h2>
+      <h2>count: {count}</h2>
+    </div>
     
     
       
@@ -216,17 +230,15 @@ if (pokemonOne && pokemonTwo && pokemonThree) {
 
 export default App;
 
-/*   let movesArray = [...pokemonOne.movepool, ...pokemonTwo.movepool, ...pokemonThree.movepool];
-  let noDuplicateArray = [...new Set(movesArray)];
-  let choosenMove = (noDuplicateArray[Math.floor(Math.random() * noDuplicateArray.length)]);
-  console.log(choosenMove);
-  let result = ''
-  if (pokemonOne.movepool.includes(choosenMove)) {
-    result = <p>{pokemonOne.name}</p>
-  } else if (pokemonTwo.movepool.includes(choosenMove)) {
-    result = <p>{pokemonTwo.name}</p>
-  } else if (pokemonThree.movepool.includes(choosenMove)) {
-    result = <p>{pokemonThree.name}</p>
-  } else {
-    console.log('no correct answer');
-  } */
+
+
+
+  /*
+  Next session: 
+
+  move the counter and choosen move section to the Results funcitonal 
+  component, add a new render that shows up as green bar when correct mon
+  is choosen and a red if it is incorrect.
+  Aim of this is to hide the loading of the next move that occurs on each 
+  generation. 
+  */
