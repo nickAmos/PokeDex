@@ -1,12 +1,46 @@
 .App-Container {
-  background-color: antiquewhite;
+  background-color: #28282B;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   flex-direction: row;
+  height: 50vh;
+}
+
+.Header {
+  background-color: #28282B;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 25vh;
+
+}
+
+.Count {
+  background-color: #28282B;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 25vh;
+}
+
+h1, h2 {
+  color: aliceblue;
+  margin: 0;
+}
+
+h1 {
+  font-size: 4rem;
+  padding-bottom: 30px;
+  padding-top: 10px;
+  margin-bottom: 10px;
+}
+h2 {
+  font-size: 2rem;
 }
 
 .Landing {
-  background-color: antiquewhite;
+  background-color: #28282B;
   display: flex;
   justify-content: center;
   height: 100vh;

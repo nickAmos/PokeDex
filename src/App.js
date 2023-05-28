@@ -2,19 +2,8 @@
 import './App.css';
 import Pokemon from './Pokemon';
 import { useEffect, useState } from "react";
-import Results from './Results';
 
 
-const counterAndMove = {
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  width: '100vw',
-  height: '30vh',
-  backgroundColor: 'rgb(54, 55, 68)',
-  color: 'white',
-  flexDirection: 'column'
-}
 
 
 function App() {
@@ -184,7 +173,7 @@ if (!generation) {
 }
 
 
-if (generation && pokemonOne) {
+if (generation && pokemonOne && pokemonTwo && pokemonThree) {
 
   let movesArray = [...pokemonOne.movepool, ...pokemonTwo.movepool, ...pokemonThree.movepool];
   let noDuplicateArray = [...new Set(movesArray)];
@@ -194,20 +183,19 @@ if (generation && pokemonOne) {
 
   return (
     <>
-    
-    <div className='App-Container'>
-      <Pokemon className='Pokemon' name={pokemonOne.name} src={pokemonOne.image} typeOne={pokemonOne.type} typeTwo={pokemonOne.typeTwo} movepool={pokemonOne.movepool} choosenMove={choosenMove}  />   
-      <Pokemon className='Pokemon' name={pokemonTwo.name} src={pokemonTwo.image} typeOne={pokemonTwo.type} typeTwo={pokemonTwo.typeTwo} movepool={pokemonTwo.movepool} choosenMove={choosenMove} /> 
-      <Pokemon className='Pokemon' name={pokemonThree.name} src={pokemonThree.image} typeOne={pokemonThree.type} typeTwo={pokemonThree.typeTwo} movepool={pokemonThree.movepool} choosenMove={choosenMove} />
+    <div className='Header'>
+      <h2>Which Pokèmon knows the move:</h2>
+      <h1>{choosenMove}</h1>
     </div>
     <div className='App-Container'>
-      <Results poke='one' choosenMove={choosenMove} movepool={pokemonOne.movepool} setGeneration={setGeneration} setCount={setCount} count={count}/>
-      <Results poke='Two' choosenMove={choosenMove} movepool={pokemonTwo.movepool} setGeneration={setGeneration} setCount={setCount} count={count}/>
-      <Results poke='Three' choosenMove={choosenMove} movepool={pokemonThree.movepool} setGeneration={setGeneration} setCount={setCount} count={count} />
+      <Pokemon className='Pokemon' name={pokemonOne.name} src={pokemonOne.image} typeOne={pokemonOne.type} typeTwo={pokemonOne.typeTwo} movepool={pokemonOne.movepool} choosenMove={choosenMove} setGeneration={setGeneration} setCount={setCount} count={count}  />   
+      <Pokemon className='Pokemon' name={pokemonTwo.name} src={pokemonTwo.image} typeOne={pokemonTwo.type} typeTwo={pokemonTwo.typeTwo} movepool={pokemonTwo.movepool} choosenMove={choosenMove} setGeneration={setGeneration} setCount={setCount} count={count} /> 
+      <Pokemon className='Pokemon' name={pokemonThree.name} src={pokemonThree.image} typeOne={pokemonThree.type} typeTwo={pokemonThree.typeTwo} movepool={pokemonThree.movepool} choosenMove={choosenMove} setGeneration={setGeneration} setCount={setCount} count={count}/>
     </div>
-    <div style={counterAndMove}>
-      <h2>{choosenMove}</h2>
-      <h2>count: {count}</h2>
+   
+    <div className='Count'>
+      
+      <h1>Current Streak: {count}</h1>
     </div>
     
     

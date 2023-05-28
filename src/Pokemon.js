@@ -3,38 +3,69 @@ import './Pokemon.css';
 import './App.css';
 
 
+
 function Pokemon(props) {
 
 const [answer, setAnswer] = useState(props.reset);
 
-console.log(props.movepool);
+
+const font = {
+    fontFamily: 'monospace',
+    fontSize: '2rem',
+    margin: '0'
+    
+}
 
 
-
+function increment() {
+    if (props.movepool.includes(props.choosenMove)) {
+        props.setCount(prev => prev + 1);
+        correct();
+} else {
+    props.setCount(0);
+    incorrect();
+}
+    setTimeout(() => {
+        props.setGeneration(prev => prev + 1);
+    }, 2000)
+}
 
 function correct() {
     if (props.movepool.includes(props.choosenMove)) {
-        setAnswer(true);
+        setAnswer('correct');
         setTimeout(() => {
             setAnswer(false);
         }, 3000);
     }
     
-
 }
 
-if (answer) {
+function incorrect() {
+    setAnswer('incorrect');
+    setTimeout(() => {
+        setAnswer(false);
+    }, 3000);
+}
+
+
+if (answer === 'correct') {
     return (
     <>
-        <div className="Container" id='container' onClick={correct}>
-            <div className="pokeInfo">
-                <h1>CORRECT</h1>
-                <p>{props.name} knows how to use {props.choosenMove}</p>
-            </div>
+        <div className="Container-correct">
+                <h1>CORRECT</h1> 
         </div>
-       
         </>
         )
+}
+
+if (answer === 'incorrect') {
+    return (
+        <>
+            <div className="Container-incorrect">
+                    <h1>Incorrect</h1> 
+            </div>
+            </>
+            )
 }
 
 if (!answer) {
@@ -42,9 +73,8 @@ if (!answer) {
     return (
         <>
         <div className="Container" id='container'>
-            <button onClick={correct}>check</button>
+            <button className='selection-button' onClick={() => {increment()}}><p style={font}>{props.name}</p></button>
             <div className="pokeInfo">
-                <h1>{props.name}</h1>
                 <img  src={props.src} alt='pokemonSprite'/>
                 <p>{props.typeOne} {props.typeTwo}</p>
                 
